@@ -1,5 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import time
+
+start = time.time()
 
 path_to_chromedriver = 'chromedriver/chromedriver'
 browser = webdriver.Chrome(executable_path = path_to_chromedriver)
@@ -19,10 +22,12 @@ views = browser.find_elements(By.CSS_SELECTOR, '#contents > ytd-video-renderer >
 num_videos = len(titles)
 
 for i in range(num_videos):
-	print(titles[i].text +': '+views[i].text)
+	# print(titles[i].text +': '+views[i].text)
 
 	f.write(titles[i].text + "," + views[i].text + "\n")
 
 browser.close()
 f.close()
 
+end = time.time()
+print("Execution time: "+ end - start + " seconds")
