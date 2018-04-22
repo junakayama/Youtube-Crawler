@@ -1,12 +1,17 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+from selenium.webdriver.chrome.options import Options
 
 start = time.time()
 
 # Simulating Chrome Browser
 path_to_chromedriver = 'chromedriver/chromedriver'
-browser = webdriver.Chrome(executable_path = path_to_chromedriver)
+options = Options()
+options.add_argument('--headless')
+options.add_argument('--disable-gpu')  # Last I checked this was necessary.
+browser = webdriver.Chrome(executable_path = path_to_chromedriver, chrome_options=options)
+
 
 # Grabbing the page
 browser.get('https://www.youtube.com/results?search_query=chitaozinho+e+xororo')
