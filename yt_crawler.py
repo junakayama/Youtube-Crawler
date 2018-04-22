@@ -1,8 +1,15 @@
-from bs4 import BeautifulSoup as soup
-import requests
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
-r = requests.get('https://www.youtube.com/results?search_query=chitaozinho+e+xororo')
-page_html = r.text
+path_to_chromedriver = 'chromedriver/chromedriver'
+browser = webdriver.Chrome(executable_path = path_to_chromedriver)
 
-page_soup = soup(page_html, "html.parser")
+url = 'https://www.youtube.com/results?search_query=chitaozinho+e+xororo'
+browser.get(url)
 
+titles = browser.find_elements(By.CSS_SELECTOR, '#contents > ytd-video-renderer > #dismissable > div > #meta > #title-wrapper > h3 > #video-title')
+num_titles = len(titles)
+for i in range(num_titles):
+	print(titles[i].text)
+
+browser.close()
